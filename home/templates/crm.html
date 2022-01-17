@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>顧客關係管理</title>
+	<meta charset="utf-8">
+	<style>
+		.container {
+			width: 1200px;
+			/* margin-left:auto;
+            margin-right:auto; */
+			margin: 0 auto;
+			position: relative;
+			background-color: aliceblue;
+			padding-bottom: 300px;
+		}
+
+		header {
+			background-color: #bedff5;
+			/* padding:20px;
+  			padding-left:40px;
+  			padding-right: 40px; */
+			padding: 20px 40px;
+			display: flex;
+			justify-content: flex-start
+			/* height:80px; */
+		}
+
+		h2 {
+			margin-left: 30px;
+		}
+
+		nav {
+			margin-left: 30px;
+		}
+
+		.logo {
+			width: 80px;
+			height: 80px;
+			margin-right: 10px;
+		}
+
+		.info {
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		.info1 {
+			margin-top: 10px;
+			margin-left: 30px;
+		}
+
+		.info2 {
+			margin-top: 10px;
+			margin-left: 250px;
+		}
+
+		.title {
+			background-color: #bedff5;
+			padding: 3px;
+		}
+
+		.dropbtn {
+			background-color: #82b0e8;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f9f9f9;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown-content a:hover {
+			background-color: #f1f1f1
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+
+		.dropdown:hover .dropbtn {
+			background-color: #82b0e8;
+		}
+
+		table {
+			margin-top: 30px;
+			border: 1px solid #333;
+			width: 60%;
+		}
+
+		thead {
+			height: 50px;
+			border-left: 1px solid #333;
+			border-bottom: 1px solid #333;
+		}
+
+		th {
+			border: 0.5px solid #333;
+		}
+
+		tbody {
+			border-top: 1px;
+		}
+
+		td {
+			text-align: center;
+			border: 0.5px solid #333;
+			height: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class=container>
+		<header>
+			<img class=logo src="/static/image/logo.png"></img>
+			<h1>飛捷廣告Feijie</h1>
+		</header>
+
+		<h2>功能列表</h2>
+
+		<nav>
+			<div class="dropdown">
+				<button class="dropbtn">作業管理</button>
+				<div class="dropdown-content">
+					<a href="http://127.0.0.1:8000/index/cons">耗材查詢與管理</a>
+					<a href="http://127.0.0.1:8000/index/emp">員工績效評估</a>
+					<a href="http://127.0.0.1:8000/index/sch">人力需求評估</a>
+				</div>
+			</div>
+
+			<div class="dropdown">
+				<button class="dropbtn">行銷管理</button>
+
+				<div class="dropdown-content">
+					<a href="http://127.0.0.1:8000/index/cus">顧客查詢</a>
+					<a href="http://127.0.0.1:8000/index/crm">顧客關係管理</a>
+					<a href="http://127.0.0.1:8000/index/ma">行銷分析</a>
+				</div>
+			</div>
+		</nav>
+
+		<h3 style="margin-left:30px; margin-top:30px;">顧客關係管理</h3>
+
+		<div class=info>
+			<div class=info1>
+				<form name="rate" method="post">
+					{% csrf_token %}
+					<!--留存率 -->
+					<h4 class=title>留存率</h4>
+
+					<label>月份:</label>
+
+					<select name="period_rr">
+						<option value="1">1 月 ~ 2 月</option>
+						<option value="2">2 月 ~ 3 月</option>
+						<option value="3">3 月 ~ 4 月</option>
+						<option value="4">4 月 ~ 5 月</option>
+						<option value="5">5 月 ~ 6 月</option>
+						<option value="6">6 月 ~ 7 月</option>
+						<option value="7">7 月 ~ 8 月</option>
+						<option value="8">8 月 ~ 9 月</option>
+						<option value="9">9 月 ~ 10 月</option>
+						<option value="10">10 月 ~ 11 月</option>
+						<option value="11">11 月 ~ 12 月</option>
+					</select>
+
+					<label>年份:</label>
+
+					<select name="year_rr">
+						<option value="2021">2021</option>
+					</select>
+
+					<p> 結果: {{rr}}</p>
+
+					<!--存活率 -->
+					<h4 class=title>存活率</h4>
+
+					<label>月份:</label>
+
+					<select name="period_sr">
+						<option value="1">1 月 ~ 2 月</option>
+						<option value="2">1 月 ~ 3 月</option>
+						<option value="3">1 月 ~ 4 月</option>
+						<option value="4">1 月 ~ 5 月</option>
+						<option value="5">1 月 ~ 6 月</option>
+						<option value="6">1 月 ~ 7 月</option>
+						<option value="7">1 月 ~ 8 月</option>
+						<option value="8">1 月 ~ 9 月</option>
+						<option value="9">1 月 ~ 10 月</option>
+						<option value="10">1 月 ~ 11 月</option>
+						<option value="11">1 月 ~ 12 月</option>
+					</select>
+
+					<label>年份:</label>
+
+					<select name="year_sr">
+						<option value="2021">2021</option>
+					</select>
+
+					<p> 結果: {{sr}}</p>
+
+					<!--流失率 -->
+					<h4 class=title>流失率</h4>
+
+					<label>月份:</label>
+
+					<select name="period_lr">
+						<option value="1">1 月 ~ 2 月</option>
+						<option value="2">2 月 ~ 3 月</option>
+						<option value="3">3 月 ~ 4 月</option>
+						<option value="4">4 月 ~ 5 月</option>
+						<option value="5">5 月 ~ 6 月</option>
+						<option value="6">6 月 ~ 7 月</option>
+						<option value="7">7 月 ~ 8 月</option>
+						<option value="8">8 月 ~ 9 月</option>
+						<option value="9">9 月 ~ 10 月</option>
+						<option value="10">10 月 ~ 11 月</option>
+						<option value="11">11 月 ~ 12 月</option>
+					</select>
+
+					<label>年份:</label>
+
+					<select name="year_lr">
+						<option value="2021">2021</option>
+					</select>
+
+					<p> 結果: {{lr}}</p>
+
+					<input type="submit" name="rateSearch" value="查詢">
+				</form>
+			</div>
+
+			<div class=info2>
+				<!--平均購買間隔時間 -->
+				<h4 class=title>平均購買間隔時間</h4>
+
+				<form name="ait" method="post">
+					{% csrf_token %}
+					<p>顧客ID 和 時間區段:
+						<input name="id" type="search" size="25" maxlength="30" placeholder="請輸入顧客ID">
+						<select name="period_ait">
+							<option value="sofar">從以前至今</option>
+							<option value="365days">距離前一年</option>
+							<option value="180days">距離前半年</option>
+							<option value="90days">距離前三個月</option>
+							<option value="30days">距離前一個月</option>
+						</select>
+						<br>
+					</p>
+
+					<p> 結果: {{ait}}</p>
+
+					<input type="submit" name="aitSearch" value="查詢">
+				</form>
+
+				<!--RFM -->
+				<h4 class=title>RFM</h4>
+
+				<form name="rfm" method="post">
+					{% csrf_token %}
+					<p>時間區段(內包含所有顧客):
+						<select name="period_rfm">
+							<option value="sofar">從以前至今</option>
+							<option value="365days">距離前一年</option>
+							<option value="180days">距離前半年</option>
+							<option value="90days">距離前三個月</option>
+							<option value="30days">距離前一個月</option>
+						</select>
+						<br>
+					</p>
+
+					<input type="submit" name="rfmSearch" value="查詢">
+
+					<table>
+						<thead>
+							<tr>
+								<th>客群定位</th>
+								<th>顧客ID</th>
+								<th>Recency</th>
+								<th>Frequency</th>
+								<th>Monetary Value</th>
+								<th>顧客姓名</th>
+							</tr>
+						</thead>
+						<tbody style="width: 900px; overflow: auto">
+							{% for customer in rfm %}
+							{% for cus in customer %}
+							<tr>
+								{% for c in cus %}
+								<td>{{c}}</td>
+								{% endfor %}
+							</tr>
+							{% endfor %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

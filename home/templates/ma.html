@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>行銷分析</title>
+    <meta charset="utf-8">
+    <style>
+        .container {
+            width: 1200px;
+            /* margin-left:auto;
+            margin-right:auto; */
+            margin: 0 auto;
+            position: relative;
+            background-color: aliceblue;
+            padding-bottom: 300px;
+        }
+
+        header {
+            background-color: #bedff5;
+            /* padding:20px;
+            padding-left:40px;
+            padding-right: 40px; */
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-start
+            /* height:80px; */
+        }
+
+        h2 {
+            margin-left: 30px;
+        }
+
+        nav {
+            margin-left: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .info1 {
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .info2 {
+            margin-top: 10px;
+            margin-left: 100px;
+        }
+
+        .title {
+            background-color: #bedff5;
+            padding: 3px;
+        }
+
+        .dropbtn {
+            background-color: #82b0e8;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #82b0e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=container>
+        <header>
+            <img class=logo src="/static/image/logo.png"></img>
+            <h1>飛捷廣告Feijie</h1>
+        </header>
+
+        <h2>功能列表</h2>
+
+        <nav>
+            <div class="dropdown">
+                <button class="dropbtn">作業管理</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/index/cons">耗材查詢與管理</a>
+                    <a href="http://127.0.0.1:8000/index/emp">員工績效評估</a>
+                    <a href="http://127.0.0.1:8000/index/sch">人力需求評估</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">行銷管理</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/index/cus">顧客查詢</a>
+                    <a href="http://127.0.0.1:8000/index/crm">顧客關係管理</a>
+                    <a href="http://127.0.0.1:8000/index/ma">行銷分析</a>
+                </div>
+            </div>
+        </nav>
+
+        <h3 style="margin-left:30px; margin-top:30px;">行銷分析</h3>
+
+        <div class=info>
+            <div class=info1>
+
+                <!--銷售額 -->
+                <h4 class=title>銷售額</h4>
+
+                <form name="sales" method="post">
+                    {% csrf_token %}
+                    <label>月份:</label>
+
+                    <select name="month_sales">
+                        <option value="01">1 月</option>
+                        <option value="02">2 月</option>
+                        <option value="03">3 月</option>
+                        <option value="04">4 月</option>
+                        <option value="05">5 月</option>
+                        <option value="06">6 月</option>
+                        <option value="07">7 月</option>
+                        <option value="08">8 月</option>
+                        <option value="09">9 月</option>
+                        <option value="10">10 月</option>
+                        <option value="11">11 月</option>
+                        <option value="12">12 月</option>
+                    </select>
+
+                    <label>年份:</label>
+
+                    <select name="year_sales">
+                        <option value="2021">2021</option>
+                    </select>
+
+                    <p>結果: {{sales}}</p>
+
+                    <input type="submit" name="salesSearch" value="查詢">
+                </form>
+
+                <!--銷售成長率 -->
+                <h4 class=title>銷售成長率</h4>
+
+                <form name="sgr" method="post">
+                    {% csrf_token %}
+                    <label>年份:</label>
+
+                    <select name="year_sgr">
+                        <option value="2021">2021</option>
+                    </select>
+
+                    <p>月份:
+                        <select name="time_after">
+                            <option value="01">1 月</option>
+                            <option value="02">2 月</option>
+                            <option value="03">3 月</option>
+                            <option value="04">4 月</option>
+                            <option value="05">5 月</option>
+                            <option value="06">6 月</option>
+                            <option value="07">7 月</option>
+                            <option value="08">8 月</option>
+                            <option value="09">9 月</option>
+                            <option value="10">10 月</option>
+                            <option value="11">11 月</option>
+                            <option value="12">12 月</option>
+                        </select>
+
+                        <label>對比</label>
+                        
+                        <select name="time_before">
+                            <option value="01">1 月</option>
+                            <option value="02">2 月</option>
+                            <option value="03">3 月</option>
+                            <option value="04">4 月</option>
+                            <option value="05">5 月</option>
+                            <option value="06">6 月</option>
+                            <option value="07">7 月</option>
+                            <option value="08">8 月</option>
+                            <option value="09">9 月</option>
+                            <option value="10">10 月</option>
+                            <option value="11">11 月</option>
+                            <option value="12">12 月</option>
+                        </select>
+                    </p>
+
+                    <p> 結果: {{sgr}}</p>
+
+                    <input type="submit" name="salesGrowthSearch" value="查詢">
+                </form>
+            </div>
+
+            <div class=info2>
+                <!--銷售額圖 -->
+                <h4 class=title>銷售額圖</h4>
+
+                <form name="sales_plot" method="post">
+                    {% csrf_token %}
+                    <label>年份:</label>
+
+                    <select name="year_plot_sales">
+                        <option value="2021">2021</option>
+                    </select>
+
+                    <p>
+                        <img src="/static/image/salesShow2021.jpg">
+                    </p>
+                </form>
+
+                <!--銷售成長率圖 -->
+                <h4 class=title>銷售成長率圖</h4>
+
+                <form name="sgr_plot" method="post">
+                    {% csrf_token %}
+                    <label>年份:</label>
+
+                    <select name="year_plot_sgr">
+                        <option value="2021">2021</option>
+                    </select>
+
+                    <p>
+                        <img src="/static/image/sgrShow2021.jpg">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
